@@ -1,0 +1,144 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  a[mat-mini-fab]  {
+    background: linear-gradient(to bottom, #191919, #303030, #1a1a1a);
+    color: #d8d8d8;
+    box-shadow: 0 0.1rem 0.1rem 0.1rem #00000079;
+
+    &:hover {
+      background: linear-gradient(to bottom, #303030, #191919, #1a1a1a);
+      color: #a5a5a5;
+      box-shadow: 0 0 0.2rem 0.1rem #000000b4;
+    }
+
+    mat-icon {
+      height: 1.3rem;
+      width: 1.3rem;
+    }
+  }
+
+  .is-mobile {
+
+    mat-toolbar {
+      position: fixed;
+      z-index: 2;
+    }
+
+    mat-sidenav-container {
+      /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+         `<body>` to be our scrolling element for mobile layouts. */
+      flex: 1 0 auto;
+    }
+  }
+
+  mat-toolbar {
+    background: linear-gradient(to bottom, #060606, #252525, #000000);
+    justify-content: space-between;
+
+    .toolbar-start {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      button {
+        &:hover {
+          mat-icon {
+            color: #a5a5a5;
+          }
+        }
+
+        mat-icon {
+          color: #fff;
+        }
+      }
+
+      .logo {
+        position: relative;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+
+        &:hover {
+          color: #a5a5a5;
+
+          img {
+            filter: brightness(0.8);
+          }
+        }
+
+        img {
+          position: absolute;
+          height: 4rem;
+          top: -0.5rem;
+          left: 0.5rem;
+          z-index: 5;
+        }
+
+        h1 {
+          font-family: "Amita", serif;
+          padding-left: 3rem;
+        }
+      }
+    }
+
+    .toolbar-end {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+
+  mat-sidenav-container {
+    flex: 1;
+
+    mat-sidenav {
+      background-color: #383838;
+      max-width: 18vw;
+      border: none;
+      border-radius: 0;
+
+      .link-btns {
+        display: none;
+      }
+    }
+
+    mat-sidenav-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .container {
+    mat-toolbar {
+      .toolbar-end {
+        display: none;
+      }
+    }
+    mat-sidenav-container {
+      mat-sidenav {
+        max-width: 80vw;
+
+        .link-btns {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
+          padding: 2rem;
+        }
+      }
+    }
+  }
+}

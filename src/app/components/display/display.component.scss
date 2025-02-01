@@ -1,0 +1,38 @@
+mat-card {
+  gap: 1.5rem;
+  .content-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem 0;
+
+    a[mat-fab] {
+      background-color: #c9c9c9;
+      color: #333;
+      font-family: "Cinzel Decorative", serif;
+      text-transform: capitalize;
+      font-size: 1.1rem;
+      font-weight: 600;
+
+      mat-icon {
+        color: #817e56a5;
+      }
+    }
+
+    .file-link {
+      background-color: #00000013;
+      color: #333;
+      font-family: "Zen Old Mincho", serif;
+      font-size: 1.1rem;
+      text-align: center;
+      padding: 0.5rem 1rem;
+      border-radius: 1rem;
+
+      &:hover {
+        background-color: #0000002a;
+      }
+    }
+  }
+}

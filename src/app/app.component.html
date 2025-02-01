@@ -1,0 +1,109 @@
+<div class="container" [class.is-mobile]="mobileQuery.matches">
+  <mat-toolbar>
+    <div class="toolbar-start">
+      <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+      <a class="logo" routerLink="/" (click)="collapseAll()">
+        <img src="/images/logo_small.png" alt="">
+        <h1 class="app-name">{{title}}</h1>
+      </a>
+    </div>
+    <div class="toolbar-end">
+      <a mat-mini-fab href="https://www.nexusmods.com/skyrimspecialedition/mods/69338" matTooltip="Download"
+        target="_blank" rel="noopener noreferrer">
+        <mat-icon svgIcon="nexus"></mat-icon>
+      </a>
+      <a mat-mini-fab href="https://github.com/idrinth-thalui" matTooltip="GitHub" target="_blank"
+        rel="noopener noreferrer">
+        <mat-icon svgIcon="github"></mat-icon>
+      </a>
+      <a mat-mini-fab href="https://discord.com/invite/xHSF8CGPTh" matTooltip="Discord" target="_blank"
+        rel="noopener noreferrer">
+        <mat-icon svgIcon="discord"></mat-icon>
+      </a>
+    </div>
+  </mat-toolbar>
+
+  <mat-sidenav-container>
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="mobileQuery.matches ? false : true"
+      [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+
+      <mat-nav-list>
+        @for (sectionKey of getObjectKeys(fileStructure); track sectionKey) {
+        <!-- Exclude README.md from the first level -->
+        @if (!sectionKey.includes('README')) {
+        <!-- Handle markdown file directly -->
+        @if (!hasSubItems(fileStructure[sectionKey])) {
+        <a mat-list-item class="file-name" [routerLink]="[sectionKey]" routerLinkActive="active">
+          {{ formatFileName(sectionKey) }}
+        </a>
+        }
+        }
+
+        <!-- Handle nested objects that have sub-items (top-level) -->
+        @if (hasSubItems(fileStructure[sectionKey])) {
+        <a mat-list-item [routerLink]="[sectionKey]" routerLinkActive="active" (click)="toggleSubmenu(sectionKey)">
+          {{ sectionKey }}
+          <mat-icon>{{ expandedSections[sectionKey] ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </a>
+        }
+
+        @if (expandedSections[sectionKey]) {
+        <mat-nav-list>
+          @for (topicKey of getObjectKeys(fileStructure[sectionKey]); track topicKey) {
+          <!-- Handle markdown file -->
+          @if (!hasSubItems(fileStructure[sectionKey][topicKey])) {
+          <a mat-list-item class="file-name" [routerLink]="[sectionKey, topicKey]" routerLinkActive="active">
+            {{ formatFileName(topicKey) }}
+          </a>
+          }
+
+          <!-- Handle nested objects (second level) -->
+          @if (hasSubItems(fileStructure[sectionKey][topicKey])) {
+          <a mat-list-item [routerLink]="[sectionKey, topicKey]" routerLinkActive="active"
+            (click)="toggleSubSubmenu(sectionKey, topicKey)">
+            {{ topicKey }}
+            <mat-icon>{{ expandedSubSections[topicKey] ? 'expand_less' : 'expand_more' }}</mat-icon>
+          </a>
+          }
+
+          @if (expandedSubSections[topicKey]) {
+          <mat-nav-list>
+            @for (subTopicKey of getObjectKeys(fileStructure[sectionKey][topicKey]); track subTopicKey) {
+            @if (!hasSubItems(fileStructure[sectionKey][topicKey][subTopicKey])) {
+            <a mat-list-item class="file-name" [routerLink]="[sectionKey, topicKey, subTopicKey]"
+              routerLinkActive="active">
+              {{ formatFileName(subTopicKey) }}
+            </a>
+            }
+            }
+          </mat-nav-list>
+          }
+          }
+        </mat-nav-list>
+        }
+        }
+      </mat-nav-list>
+
+      <div class="link-btns">
+        <a mat-mini-fab href="https://www.nexusmods.com/skyrimspecialedition/mods/69338" matTooltip="Download"
+          target="_blank" rel="noopener noreferrer">
+          <mat-icon svgIcon="nexus"></mat-icon>
+        </a>
+        <a mat-mini-fab href="https://github.com/idrinth-thalui" matTooltip="GitHub" target="_blank"
+          rel="noopener noreferrer">
+          <mat-icon svgIcon="github"></mat-icon>
+        </a>
+        <a mat-mini-fab href="https://discord.com/invite/xHSF8CGPTh" matTooltip="Discord" target="_blank"
+          rel="noopener noreferrer">
+          <mat-icon svgIcon="discord"></mat-icon>
+        </a>
+      </div>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  <app-footer></app-footer>
+</div>

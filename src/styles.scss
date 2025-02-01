@@ -1,0 +1,181 @@
+@use '@angular/material' as mat;
+
+$theme: mat.define-theme((color: (theme-type: light,
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      )));
+
+body {
+  margin: 0;
+  height: 100%;
+  font-family: "Zen Old Mincho", serif;
+
+  @include mat.all-component-themes($theme);
+}
+
+html {
+  height: 100%;
+}
+
+@include mat.core();
+@include mat.color-variants-backwards-compatibility($theme);
+
+// @import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap');
+
+// Main Title (LOGO)
+@import url('https://fonts.googleapis.com/css2?family=Amita:wght@400;700&display=swap');
+
+// Headings
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
+
+// Body Text
+@import url('https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;600;700;900&display=swap');
+
+a {
+  text-decoration: none;
+}
+
+h2 {
+  font-family: "Cinzel Decorative", serif;
+  font-size: 2rem;
+}
+
+h3 {
+  font-family: "Cinzel Decorative", serif !important;
+  text-transform: capitalize;
+  font-size: 1.5rem !important;
+
+  &.title {
+    margin-top: 1rem;
+  }
+}
+
+p {
+  font-family: "Zen Old Mincho", serif;
+  font-size: 1.1rem;
+  line-height: 1.8rem;
+}
+
+li {
+  font-family: "Zen Old Mincho", serif;
+  font-size: 1.1rem;
+  line-height: 1.8rem;
+}
+
+.mdc-list-item__primary-text {
+  color: #f4f4f4 !important;
+  font-family: "Cinzel Decorative", serif !important;
+  font-size: 1.2rem !important;
+  display: flex;
+  justify-content: space-between;
+}
+
+mat-sidenav {
+
+  mat-nav-list {
+    background-color: #333 !important;
+    padding: 1rem 0 0 0 !important;
+
+    a {
+      background-color: #333 !important;
+      border-radius: 0 !important;
+
+      .mdc-list-item__primary-text {
+        text-transform: uppercase;
+      }
+
+      &.file-name {
+        .mdc-list-item__primary-text {
+          font-family: "Zen Old Mincho", serif !important;
+          font-size: 1.1rem !important;
+        }
+      }
+
+      &.active {
+        background-color: #ffffff18 !important;
+      }
+    }
+
+    mat-nav-list {
+      background-color: #444 !important;
+      padding: 0 !important;
+      margin: 0 0.5rem !important;
+
+      a {
+        background-color: #444 !important;
+        border-radius: 0;
+
+        .mdc-list-item__primary-text {
+          font-size: 1.1rem !important;
+          text-transform: capitalize;
+        }
+      }
+
+      mat-nav-list {
+        background-color: #555 !important;
+        padding: 0 !important;
+        margin: 0 0.5rem !important;
+
+        a {
+          background-color: #555 !important;
+          border-radius: 0;
+        }
+      }
+    }
+  }
+}
+
+
+mat-card {
+  min-height: 50vh;
+  width: 70vw;
+  padding: 2rem;
+  margin: 2rem;
+  background: radial-gradient(circle, #ffffff, #dcdcdc);
+
+  .mat-card-content {
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: "Cinzel Decorative", serif;
+      font-size: 2.3rem;
+
+      img {
+        width: 75%;
+        height: 75%;
+        margin: 0.5rem 0 1rem;
+      }
+    }
+
+    h2 {
+      font-family: "Cinzel Decorative", serif;
+      font-size: 2rem;
+    }
+
+    h3 {
+      font-family: "Cinzel Decorative", serif;
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-family: "Zen Old Mincho", serif;
+      font-size: 1.1rem;
+      line-height: 1.8rem;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+
+  .title {
+    text-align: center;
+  }
+
+  mat-card {
+    width: 90vw;
+  }
+}

@@ -1,0 +1,33 @@
+<h3 class="title">{{ title }}</h3>
+
+<mat-card>
+
+  @if (directoryContent.length > 0) {
+  <div class="content-wrapper">
+
+    @for (item of directoryContent; track item) {
+    @if (!item.endsWith('.md')) {
+    <!-- Display markdown files as regular links -->
+    <a mat-fab extended [routerLink]="buildRouterLink(item)">
+      <mat-icon>folder</mat-icon>
+      {{ markdownService.formatFileName(item) }}
+    </a>
+    }
+    }
+  </div>
+  <!-- <mat-divider></mat-divider> -->
+  <div class="content-wrapper">
+    @for (item of directoryContent; track item) {
+    @if (item.endsWith('.md')) {
+    <!-- Display markdown files as regular links -->
+    <a class="file-link" [routerLink]="buildRouterLink(item)">
+      {{ markdownService.formatFileName(item) }}
+    </a>
+    }
+    }
+  </div>
+
+  } @else {
+  <div class="mat-card-content" [innerHTML]="htmlContent"></div>
+  }
+</mat-card>
