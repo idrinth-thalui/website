@@ -18,7 +18,7 @@ export class MarkdownService {
     let formattedName = fileName.replace(/.md$/i, '');
 
     // Remove "IdrinthFollower" from the file name if it exists
-    formattedName = formattedName.replace(/^idrinthfollower(aprilfools)?/i, '');
+    formattedName = formattedName.replace(/^idrinthfollower(( - )?aprilfools)?/i, '');
 
     // Add spaces between camelCase or PascalCase words
     formattedName = formattedName.replace(/([a-z])([A-Z])/g, '$1 $2');
